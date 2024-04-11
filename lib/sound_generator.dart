@@ -110,4 +110,10 @@ class SoundGenerator {
     await _channel
         .invokeMethod("setVolume", <String, dynamic>{"volume": volume});
   }
+
+  /// Set decibel
+  static void setDecibel(double decibel) async {
+    await _channel
+        .invokeMethod("setDecibel", <String, dynamic>{"decibel": decibel});
+  }
 }
