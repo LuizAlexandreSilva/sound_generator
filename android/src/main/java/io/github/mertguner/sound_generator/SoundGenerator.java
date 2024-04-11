@@ -76,6 +76,17 @@ public class SoundGenerator {
         }
     }
 
+
+    public void setDecibel(float decibel) {
+        if (generator != null)
+            generator.setDecibel(decibel);
+    }
+
+    public float getDecibel() {
+        if (generator != null)
+            return generator.getDecibel();
+        return 0;
+    }
     public void setWaveform(WaveTypes waveType) {
         if (this.waveType.equals(waveType) || (generator == null))
             return;
