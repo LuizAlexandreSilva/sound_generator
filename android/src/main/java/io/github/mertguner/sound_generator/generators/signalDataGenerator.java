@@ -15,6 +15,9 @@ public class signalDataGenerator {
     private float smoothStep = 1f / (float) sampleRate * 20f;
 
     private float frequency = 50;
+
+    private float decibel = 20;
+
     private baseGenerator generator = new sinusoidalGenerator();
 
     private short[] backgroundBuffer;
@@ -62,6 +65,26 @@ public class signalDataGenerator {
         buffer = new short[bufferSamplesSize];
         setSampleRate(sampleRate);
         updateOnce();
+
+        // Apply the specified decibel level to the entire waveform
+        float maxAmplitude = findMaxAmplitude(backgroundBuffer);
+        float amplitude = (float) Math.pow(10, decibel / 20.0);
+        for (int i = 0; i < bufferSamplesSize; i++) {
+            backgroundBuffer[i] = (short) (backgroundBuffer[i] * amplitude / maxAmplitude);
+        }
+
+    }
+
+    // Helper method to find the maximum amplitude in the waveform
+    private float findMaxAmplitude(short[] waveform) {
+        float maxAmplitude = 0;
+        for (short sample : waveform) {
+            float sampleValue = Math.abs(sample);
+            if (sampleValue > maxAmplitude) {
+                maxAmplitude = sampleValue;
+            }
+        }
+        return maxAmplitude;
     }
 
     public void updateOnce() {
@@ -116,4 +139,13 @@ public class signalDataGenerator {
         oneCycleBuffer.add((int)generator.getValue(0, _2Pi));
         getOneCycleDataHandler.setData(oneCycleBuffer);
     }
+
+    public float getDecibel() {
+        return decibel;
+    }
+
+    public void setDecibel(float decibel) {
+        this.decibel = decibel;
+    }
+
 }

@@ -71,17 +71,8 @@ public class SoundGenerator {
     }
 
 
-    public void setVolume(float volume, boolean recalculateDecibel) {
+    public void setVolume(float volume) {
         volume = Math.max(0, Math.min(1, volume));
-        this.volume = volume;
-
-        if(recalculateDecibel) {
-            if (volume >= 0.000001f) {
-                this.dB = 20f * (float) Math.log10(volume);
-            } else {
-                this.dB = -120f;
-            }
-        }
 
         if (audioTrack != null) {
             audioTrack.setStereoVolume(leftVolume * volume, rightVolume * volume);
