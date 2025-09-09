@@ -85,7 +85,7 @@ public class SoundGenerator {
 
     public void setDecibel(float dB) {
         if (generator != null)
-            generator.setDecibel(decibel);
+            generator.setDecibel(dB);
     }
 
     public float getDecibel() {
