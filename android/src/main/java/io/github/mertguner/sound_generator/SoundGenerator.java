@@ -84,16 +84,14 @@ public class SoundGenerator {
     }
 
     public void setDecibel(float dB) {
-        this.dB = dB;
-        float lineerVolume = (float) Math.pow(10f, (dB / 20f) );
-        if (lineerVolume < 0.000001f) {
-            lineerVolume = 0f;
-        }
-        setVolume(lineerVolume);
+        if (generator != null)
+            generator.setDecibel(decibel);
     }
 
     public float getDecibel() {
-        return dB;
+        if (generator != null)
+            return generator.getDecibel();
+        return 0;
     }
 
     public void setWaveform(WaveTypes waveType) {

@@ -65,14 +65,6 @@ public class signalDataGenerator {
         buffer = new short[bufferSamplesSize];
         setSampleRate(sampleRate);
         updateOnce();
-
-        // Apply the specified decibel level to the entire waveform
-        float maxAmplitude = findMaxAmplitude(backgroundBuffer);
-        float amplitude = (float) Math.pow(10, decibel / 20.0);
-        for (int i = 0; i < bufferSamplesSize; i++) {
-            backgroundBuffer[i] = (short) (backgroundBuffer[i] * amplitude / maxAmplitude);
-        }
-
     }
 
     // Helper method to find the maximum amplitude in the waveform
@@ -105,6 +97,12 @@ public class signalDataGenerator {
             if (ph > _2Pi) {
                 ph -= _2Pi;
             }
+        }
+        // Apply the specified decibel level to the entire waveform
+        float maxAmplitude = findMaxAmplitude(backgroundBuffer);
+        float amplitude = (float) Math.pow(10, decibel / 20.0);
+        for (int i = 0; i < bufferSamplesSize; i++) {
+            backgroundBuffer[i] = (short) (backgroundBuffer[i] * amplitude / maxAmplitude);
         }
         creatingNewData = false;
     }
