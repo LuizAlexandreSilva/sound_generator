@@ -84,7 +84,7 @@ public class SoundGeneratorPlugin implements FlutterPlugin, MethodCallHandler {
                 break;
             case "setVolume":
                 double volume = call.argument("volume");
-                soundGenerator.setVolume((float) volume, true);
+                soundGenerator.setVolume((float) volume);
                 break;
             case "setDecibel":
                 double dB = call.argument("dB");

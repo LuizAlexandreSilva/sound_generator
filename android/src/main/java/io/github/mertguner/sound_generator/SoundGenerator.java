@@ -89,7 +89,7 @@ public class SoundGenerator {
         if (lineerVolume < 0.000001f) {
             lineerVolume = 0f;
         }
-        setVolume(lineerVolume, false);
+        setVolume(lineerVolume);
     }
 
     public float getDecibel() {
